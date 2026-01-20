@@ -37,4 +37,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const animatedElements = document.querySelectorAll('.animate-on-scroll');
     animatedElements.forEach(el => observer.observe(el));
+
+    // Safety Timeout: Ensure fallback visibility if Observer fails
+    // This fixes the "invisible content" bug on some mobile devices while keeping animations.
+    setTimeout(() => {
+        document.querySelectorAll('.animate-on-scroll:not(.visible)').forEach(el => {
+            el.classList.add('visible');
+        });
+    }, 500); // 0.5s fallback
 });
