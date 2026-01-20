@@ -6,7 +6,16 @@ document.addEventListener('DOMContentLoaded', () => {
     if (mobileMenuBtn) {
         mobileMenuBtn.addEventListener('click', () => {
             nav.classList.toggle('active');
-            mobileMenuBtn.classList.toggle('active'); // Optional: Add animation to burger icon
+            mobileMenuBtn.classList.toggle('active');
+        });
+
+        // Close menu when a link is clicked
+        const navLinks = nav.querySelectorAll('a');
+        navLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                nav.classList.remove('active');
+                mobileMenuBtn.classList.remove('active');
+            });
         });
     }
 
