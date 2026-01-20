@@ -524,36 +524,27 @@ img {
 }
 
 /* Animations */
-/* Animation Logic - Mobile First (Default Visible) */
+/* Animation Logic - Enabled for All Devices */
 .animate-on-scroll {
-    /* Default state is VISIBLE for mobile safety */
+    opacity: 0;
+    transition: opacity 1s ease, transform 1s ease;
+}
+
+.animate-on-scroll.visible {
     opacity: 1;
     transform: none;
 }
 
-/* Apply animation behavior ONLY on larger screens */
-@media (min-width: 769px) {
-    .animate-on-scroll {
-        opacity: 0;
-        transition: opacity 1s ease, transform 1s ease;
-    }
+.fade-in-up {
+    transform: translateY(30px);
+}
 
-    .animate-on-scroll.visible {
-        opacity: 1;
-        transform: none;
-    }
+.fade-in-left {
+    transform: translateX(-50px);
+}
 
-    .fade-in-up {
-        transform: translateY(30px);
-    }
-
-    .fade-in-left {
-        transform: translateX(-50px);
-    }
-
-    .fade-in-right {
-        transform: translateX(50px);
-    }
+.fade-in-right {
+    transform: translateX(50px);
 }
 
 /* Responsive adjustments */
