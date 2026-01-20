@@ -524,69 +524,40 @@ img {
 }
 
 /* Animations */
+/* Animation Logic - Mobile First (Default Visible) */
 .animate-on-scroll {
-    opacity: 0;
-    transition: opacity 1s ease, transform 1s ease;
-}
-
-.animate-on-scroll.visible {
+    /* Default state is VISIBLE for mobile safety */
     opacity: 1;
     transform: none;
 }
 
-.fade-in-up {
-    transform: translateY(30px);
-}
-
-.fade-in-left {
-    transform: translateX(-50px);
-}
-
-.fade-in-right {
-    transform: translateX(50px);
-}
-
-/* Responsive */
-@media (max-width: 768px) {
-    .header {
-        justify-content: space-between;
-    }
-
-    .hero-container {
-        flex-direction: column;
-        gap: 2rem;
-        text-align: center;
-    }
-
-    .hero-content {
-        text-align: center;
-    }
-
-    .hero-title {
-        font-size: 3rem;
-    }
-
-    .nav {
-        display: none;
-        position: fixed;
-        top: 70px;
-        left: 0;
-        width: 100%;
-        background-color: var(--bg-color);
-        padding: 2rem;
-        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-        height: calc(100vh - 70px);
-        overflow-y: auto;
-    }
-
-    /* CRITICAL FIX: Force visibility on mobile. 
-       The IntersectionObserver animation is unreliable on some mobile clients, causing invisible content.
-       We disable the opacity: 0 start state on mobile to ensure content is readable. */
+/* Apply animation behavior ONLY on larger screens */
+@media (min-width: 769px) {
     .animate-on-scroll {
-        opacity: 1 !important;
-        transform: none !important;
-        transition: none !important;
+        opacity: 0;
+        transition: opacity 1s ease, transform 1s ease;
     }
+
+    .animate-on-scroll.visible {
+        opacity: 1;
+        transform: none;
+    }
+
+    .fade-in-up {
+        transform: translateY(30px);
+    }
+
+    .fade-in-left {
+        transform: translateX(-50px);
+    }
+
+    .fade-in-right {
+        transform: translateX(50px);
+    }
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
 
 
 
