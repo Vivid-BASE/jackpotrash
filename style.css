@@ -558,6 +558,36 @@ img {
 
 /* Responsive adjustments */
 @media (max-width: 768px) {
+    .header {
+        justify-content: space-between;
+    }
+
+    .hero-container {
+        flex-direction: column;
+        gap: 2rem;
+        text-align: center;
+    }
+
+    .hero-content {
+        text-align: center;
+    }
+
+    .hero-title {
+        font-size: 3rem;
+    }
+
+    .nav {
+        display: none;
+        position: fixed;
+        top: 70px;
+        left: 0;
+        width: 100%;
+        background-color: var(--bg-color);
+        padding: 2rem;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        height: calc(100vh - 70px);
+        overflow-y: auto;
+    }
 
 
 
