@@ -579,12 +579,7 @@ img {
         overflow-y: auto;
     }
 
-    /* Force content visibility on mobile to prevent blank screens if JS fails */
-    .animate-on-scroll {
-        opacity: 1 !important;
-        transform: none !important;
-        transition: none !important;
-    }
+
 
     .nav.active {
         display: block;

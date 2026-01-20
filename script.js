@@ -14,7 +14,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const observerOptions = {
         root: null,
         rootMargin: '0px',
-        threshold: 0.1
+        threshold: 0 // Trigger as soon as 1px is visible. Safest for mobile/tall elements.
     };
 
     const observer = new IntersectionObserver((entries, observer) => {
