@@ -579,6 +579,15 @@ img {
         overflow-y: auto;
     }
 
+    /* CRITICAL FIX: Force visibility on mobile. 
+       The IntersectionObserver animation is unreliable on some mobile clients, causing invisible content.
+       We disable the opacity: 0 start state on mobile to ensure content is readable. */
+    .animate-on-scroll {
+        opacity: 1 !important;
+        transform: none !important;
+        transition: none !important;
+    }
+
 
 
     .nav.active {
