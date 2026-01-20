@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Movie | JACKPOTRASH</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Shippori+Mincho:wght@400;500;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .video-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .video-item {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .video-link {
+            display: block;
+            text-decoration: none;
+            transition: opacity 0.3s;
+        }
+
+        .video-link:hover {
+            opacity: 0.8;
+        }
+
+        .thumbnail-container {
+            position: relative;
+            padding-bottom: 56.25%;
+            /* 16:9 */
+            height: 0;
+            overflow: hidden;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            background: #000;
+        }
+
+        .thumbnail-container img {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 100%;
+            height: auto;
+        }
+
+        .play-icon {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 60px;
+            height: 60px;
+            background: rgba(0, 0, 0, 0.7);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            font-size: 24px;
+            border: 2px solid #fff;
+            transition: background 0.3s, transform 0.3s;
+        }
+
+        .video-link:hover .play-icon {
+            background: var(--accent-color);
+            transform: translate(-50%, -50%) scale(1.1);
+            border-color: var(--accent-color);
+        }
+
+        .video-title {
+            font-size: 1rem;
+            font-weight: 700;
+            color: var(--text-main);
+            margin-top: 0.5rem;
+            line-height: 1.4;
+        }
+    </style>
+</head>
+
+<body>
+    <header class="header">
+        <div class="logo">
+            <a href="index.html"><img src="https://jackpotrash.com/newlogo.jpg" alt="JACKPOTRASH Logo"></a>
+        </div>
+        <nav class="nav">
+            <ul class="nav-list">
+                <li><a href="index.html">Top</a></li>
+                <li><a href="profile.html">Profile</a></li>
+                <li><a href="discography.html">Discography</a></li>
+                <li><a href="schedule.html">Schedule</a></li>
+                <li><a href="movie.html">Movie</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+        </nav>
+        <button class="mobile-menu-btn">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+    </header>
+
+    <main>
+        <section class="section">
+            <div class="container animate-on-scroll fade-in-up">
+                <h2 class="section-title">Movie</h2>
+
+                <div class="video-grid">
+                    <!-- 1. 2025/12/27: Eagle Wings -->
+                    <div class="video-item">
+                        <a href="https://www.youtube.com/watch?v=VS2ScVpWzGg" target="_blank" class="video-link">
+                            <div class="thumbnail-container">
+                                <img src="https://img.youtube.com/vi/VS2ScVpWzGg/hqdefault.jpg" alt="Eagle Wings">
+                                <div class="play-icon">▶</div>
+                            </div>
+                            <h3 class="video-title">2025/12/14 航空自衛隊 那覇基地「美ら島エアフェスタ2025」『Eagle Wings』</h3>
+                        </a>
+                    </div>
+
+                    <!-- 2. 2018/01/19: Aurora XFD -->
+                    <div class="video-item">
+                        <a href="https://www.youtube.com/watch?v=464EPb4NQx4" target="_blank" class="video-link">
+                            <div class="thumbnail-container">
+                                <img src="https://img.youtube.com/vi/464EPb4NQx4/hqdefault.jpg" alt="Aurora Crossfade">
+                                <div class="play-icon">▶</div>
+                            </div>
+                            <h3 class="video-title">jAcKp☆TrASH 4th Album "Aurora" Crossfade</h3>
+                        </a>
+                    </div>
+
+                    <!-- 2. 2014/12/21: Unmask XFD -->
+                    <div class="video-item">
+                        <a href="https://www.youtube.com/watch?v=XKpueZ0IO-c" target="_blank" class="video-link">
+                            <div class="thumbnail-container">
+                                <img src="https://img.youtube.com/vi/XKpueZ0IO-c/hqdefault.jpg" alt="Unmask Crossfade">
+                                <div class="play-icon">▶</div>
+                            </div>
+                            <h3 class="video-title">jAcKp☆TrASH 3rd Album "Unmask" Trailer</h3>
+                        </a>
+                    </div>
+
+                    <!-- 3. 2013/07/16: Live 20130714 -->
+                    <div class="video-item">
+                        <a href="https://www.youtube.com/watch?v=n1uoHwYzcL0" target="_blank" class="video-link">
+                            <div class="thumbnail-container">
+                                <img src="https://img.youtube.com/vi/n1uoHwYzcL0/hqdefault.jpg" alt="LIVE 2013.07.14">
+                                <div class="play-icon">▶</div>
+                            </div>
+                            <h3 class="video-title">2013.07.14 jAcKp☆TrASH LIVE</h3>
+                        </a>
+                    </div>
+
+
+
+                    <!-- 5. 2013/05/29: Second Live Digest -->
+                    <div class="video-item">
+                        <a href="https://www.youtube.com/watch?v=mPq_QP8iF90" target="_blank" class="video-link">
+                            <div class="thumbnail-container">
+                                <img src="https://img.youtube.com/vi/mPq_QP8iF90/hqdefault.jpg"
+                                    alt="Second Live Digest">
+                                <div class="play-icon">▶</div>
+                            </div>
+                            <h3 class="video-title">jAcKp☆TrASH SECOND LIVE 2013.05.04</h3>
+                        </a>
+                    </div>
+
+                    <!-- 6. 2013/01/28: Gate of Dreams XFD -->
+                    <div class="video-item">
+                        <a href="https://www.youtube.com/watch?v=Cg92SMDAWxE" target="_blank" class="video-link">
+                            <div class="thumbnail-container">
+                                <img src="https://img.youtube.com/vi/Cg92SMDAWxE/hqdefault.jpg"
+                                    alt="Gate of Dreams Crossfade">
+                                <div class="play-icon">▶</div>
+                            </div>
+                            <h3 class="video-title">jAcKp☆TrASH "The Gate of Dreams" Crossfade</h3>
+                        </a>
+                    </div>
+
+                    <!-- 7. 2012/06/02: First Live -->
+                    <div class="video-item">
+                        <a href="https://www.youtube.com/watch?v=rH4JcdMO3nw" target="_blank" class="video-link">
+                            <div class="thumbnail-container">
+                                <img src="https://img.youtube.com/vi/rH4JcdMO3nw/hqdefault.jpg" alt="First Live">
+                                <div class="play-icon">▶</div>
+                            </div>
+                            <h3 class="video-title">jAcKp☆TrASH FIRST LIVE 2012.05.19</h3>
+                        </a>
+                    </div>
+
+                    <!-- 8. 2012/03/10: Fourcount XFD -->
+                    <div class="video-item">
+                        <a href="https://www.youtube.com/watch?v=Cea6_rMTXvU" target="_blank" class="video-link">
+                            <div class="thumbnail-container">
+                                <img src="https://img.youtube.com/vi/Cea6_rMTXvU/hqdefault.jpg"
+                                    alt="Fourcount Crossfade">
+                                <div class="play-icon">▶</div>
+                            </div>
+                            <h3 class="video-title">jAcKp☆TrASH "Fourcount" Crossfade</h3>
+                        </a>
+                    </div>
+
+
+
+                </div>
+
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-logo">
+                <img src="https://jackpotrash.com/newlogo.jpg" alt="JACKPOTRASH">
+            </div>
+            <div class="footer-links">
+                <a href="https://twitter.com/JACKPOTRASH" target="_blank" class="footer-icon-link"
+                    aria-label="Official X">
+                    <svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <title>X</title>
+                        <path
+                            d="M18.901 1.153h3.68l-8.04 9.19L24 22.846h-7.406l-5.8-7.584-6.638 7.584H.474l8.6-9.83L0 1.154h7.594l5.243 6.932ZM17.61 20.644h2.039L6.486 3.24H4.298Z" />
+                    </svg>
+                </a>
+                <a href="http://blog.livedoor.jp/jackpotrash/" target="_blank" class="footer-icon-link"
+                    aria-label="Official Blog">
+                    <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path
+                            d="M12 2C6.48 2 2 6.48 2 12C2 17.52 6.48 22 12 22C17.52 22 22 17.52 22 12C22 6.48 17.52 2 12 2ZM13 17H11V15H13V17ZM13 13H11V7H13V13Z"
+                            fill="currentColor" />
+                    </svg>
+                </a>
+                <a href="contact.html" class="footer-icon-link" aria-label="Contact">
+                    <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path
+                            d="M20 4H4C2.9 4 2.01 4.9 2.01 6L2 18C2 19.1 2.9 20 4 20H20C21.1 20 22 19.1 22 18V6C22 4.9 21.1 4 20 4ZM20 18H4V8L12 13L20 8V18ZM12 11L4 6H20L12 11Z"
+                            fill="currentColor" />
+                    </svg>
+                </a>
+            </div>
+            <p class="copyright">copyright© jAcKp☆TrASH all rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
