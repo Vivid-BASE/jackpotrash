@@ -3,10 +3,8 @@
     --card-bg: #1a1a1a;
     --text-main: #ffffff;
     --text-muted: #b3b3b3;
-    --accent-color: #e50914;
-    /* Red accent */
+    --accent-color: #ff00e0; /* Vibrant Pink */
     --accent-secondary: #ffd700;
-    /* Gold accent */
     --font-heading: 'Playfair Display', serif;
     --font-body: 'Shippori Mincho', serif;
 }
@@ -74,8 +72,9 @@ img {
 }
 
 .logo img {
-    height: 40px;
+    height: 38px; /* Further reduced as requested */
     width: auto;
+    filter: invert(1) drop-shadow(0 0 10px rgba(255, 0, 224, 0.4)); /* Invert for dark theme + Pink glow */
 }
 
 .nav-list {
@@ -84,6 +83,7 @@ img {
 }
 
 .nav-list a {
+    color: var(--accent-color); /* Pink */
     font-weight: 700;
     font-size: 0.9rem;
     letter-spacing: 0.05em;
@@ -101,7 +101,22 @@ img {
     transition: width 0.3s;
 }
 
-.nav-list a:hover::after {
+.nav-list a.stealth-link {
+    font-size: 0.8rem;
+    color: rgba(255, 255, 255, 0.4);
+    font-weight: 400;
+    transition: color 0.3s ease;
+}
+
+.nav-list a.stealth-link::after {
+    display: none;
+}
+
+.nav-list a.stealth-link:hover {
+    color: rgba(255, 255, 255, 0.8);
+}
+
+.nav-list a:not(.stealth-link):hover::after {
     width: 100%;
 }
 
@@ -118,79 +133,338 @@ img {
     display: block;
     width: 25px;
     height: 2px;
-    background-color: var(--text-main);
+    background-color: var(--accent-color); /* Pink */
 }
 
-/* Hero */
+/* Hyper-Impact Hero Redesign - Ultra Premium (Visible Fix) */
 .hero {
+    position: relative;
     min-height: 100vh;
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 120px 2rem 4rem;
-    /* Top padding to account for header */
+    padding-top: 140px; /* Stronger offset for header visibility */
+    background: #020202;
+    overflow: hidden;
+    perspective: 2500px;
 }
 
-.hero-container {
-    max-width: 1200px;
+/* Moving Mesh Background - Increased Speed */
+.hero-mesh-bg {
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: 
+        radial-gradient(circle at 30% 30%, rgba(229, 9, 20, 0.5) 0%, transparent 45%),
+        radial-gradient(circle at 70% 60%, rgba(138, 43, 226, 0.4) 0%, transparent 45%),
+        radial-gradient(circle at 40% 80%, rgba(255, 215, 0, 0.15) 0%, transparent 35%);
+    filter: blur(40px);
+    animation: meshRotate 8s linear infinite; /* Faster rotation */
+    z-index: 1;
+    opacity: 0.9;
+}
+
+@keyframes meshRotate {
+    0% { transform: rotate(0deg) scale(1); }
+    50% { transform: rotate(180deg) scale(1.15); } /* More dynamic scale */
+    100% { transform: rotate(360deg) scale(1); }
+}
+
+.hero-vignette {
+    position: absolute;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: radial-gradient(circle at 50% 50%, transparent 15%, rgba(0,0,0,1) 100%);
+    z-index: 2;
+    pointer-events: none;
+}
+
+.hero-particles {
+    position: absolute;
+    top: 0; left: 0; width: 100%; height: 100%;
+    z-index: 5;
+    pointer-events: none;
+}
+
+.hero-content-wrapper {
+    position: relative;
+    z-index: 10;
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Center horizontally */
+    justify-content: center;
     width: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 4rem;
-    flex-wrap: wrap;
+    text-align: center;
+    margin-top: -5vh; /* Push everything slightly up to avoid overlap at bottom */
 }
 
-.hero-image-wrapper {
-    flex: 1;
-    min-width: 300px;
-    max-width: 500px;
-    display: flex;
-    justify-content: center;
+.hero-perspective-container {
+    width: 100%;
+    max-width: 720px; /* Reduced to shrink emblem slightly */
+    perspective: 3000px;
+    margin-bottom: 5.5rem; /* Increased significantly to clear text from scroll line */
+    transform-style: preserve-3d;
 }
 
-.hero-img {
+.hero-logo-container {
+    position: relative;
+    transform-style: preserve-3d;
+    /* overflow: hidden; REMOVED to avoid square frame */
+    animation: explosiveEntrance 2.0s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+/* Internal Logo Glint - Strictly inside the emblem shape */
+.logo-glint-mask {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 2;
+    mask-image: url('images/jAcKp☆TrASHロゴ.png');
+    mask-size: contain;
+    mask-repeat: no-repeat;
+    mask-position: center;
+    -webkit-mask-image: url('images/jAcKp☆TrASHロゴ.png');
+    -webkit-mask-size: contain;
+    -webkit-mask-repeat: no-repeat;
+    -webkit-mask-position: center;
+}
+
+.logo-glint-beam {
+    position: absolute;
+    top: -100%;
+    left: -150%;
+    width: 60%;
+    height: 300%;
+    background: linear-gradient(
+        to right,
+        rgba(255, 255, 255, 0) 0%,
+        rgba(255, 255, 255, 0.1) 40%,
+        rgba(255, 255, 255, 0.8) 50%,
+        rgba(255, 255, 255, 0.1) 60%,
+        rgba(255, 255, 255, 0) 100%
+    );
+    transform: rotate(25deg);
+    animation: innerGlint 5s ease-in-out infinite 1.5s;
+}
+
+@keyframes innerGlint {
+    0% { left: -150%; }
+    15% { left: 150%; }
+    100% { left: 150%; }
+}
+
+@keyframes explosiveEntrance {
+    0% { 
+        transform: translateY(60px) scale(0.9) translateZ(-200px); 
+        opacity: 0; 
+        filter: brightness(2) blur(15px); 
+    }
+    100% { 
+        transform: translateY(0) scale(1) translateZ(0); 
+        opacity: 1; 
+        filter: brightness(1) blur(0); 
+    }
+}
+
+.hero-main-logo {
     width: 100%;
     height: auto;
-    object-fit: contain;
-    /* Ensures no cropping */
-    border-radius: 4px;
-    /* subtle radius */
-    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+    /* Soft Glow Aura */
+    filter: drop-shadow(0 0 50px rgba(255, 0, 224, 0.8)) drop-shadow(0 0 20px rgba(255, 0, 224, 0.4));
 }
 
-.hero-content {
-    flex: 1;
-    min-width: 300px;
-    text-align: left;
+.logo-flash {
+    position: absolute;
+    top: 50%; left: 50%;
+    width: 200%; height: 200%;
+    background: radial-gradient(circle, #fff 0%, transparent 60%);
+    transform: translate(-50%, -50%) scale(0);
+    opacity: 0;
+    pointer-events: none;
+    z-index: 11;
 }
 
-.hero-title {
-    font-family: var(--font-heading);
-    font-size: 4rem;
-    line-height: 1.2;
-    font-weight: 900;
-    background: linear-gradient(45deg, #fff, var(--text-muted));
-    -webkit-background-clip: text;
-    background-clip: text;
-    -webkit-text-fill-color: transparent;
-    margin-bottom: 0.5rem;
-    padding-bottom: 0.1em;
-    text-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
+/* Mega Glint Pulse Triggered by JS */
+.logo-mega-pulse .logo-flash {
+    animation: megaGlintPulse 1s ease-out forwards;
 }
 
-.hero-subtitle {
-    font-size: 1.2rem;
-    letter-spacing: 0.3rem;
-    color: var(--accent-color);
+.logo-mega-pulse .logo-glint-beam {
+    animation: innerGlint 1s ease-in-out forwards;
+}
+
+@keyframes megaGlintPulse {
+    0% { transform: translate(-50%, -50%) scale(0); opacity: 0; }
+    20% { opacity: 0.8; }
+    100% { transform: translate(-50%, -50%) scale(1.5); opacity: 0; }
+}
+
+.hero-tagline-reveal {
+    overflow: hidden;
     margin-bottom: 2rem;
-    font-weight: 700;
 }
 
-.hero-copy {
-    font-size: 1.1rem;
-    color: var(--text-muted);
+.hero-tagline {
+    font-size: 1.5rem;
+    font-weight: 700;
+    letter-spacing: 1.2rem;
+    color: var(--accent-color); /* Pink */
+    margin-bottom: 0.5rem;
+    text-shadow: 0 0 20px rgba(255, 0, 224, 0.4);
+    opacity: 0;
+    animation: explosiveEntrance 2.0s cubic-bezier(0.22, 1, 0.36, 1) 0.1s forwards;
 }
+
+.hero-description {
+    font-size: 1.1rem;
+    letter-spacing: 0.3rem;
+    color: rgba(255, 255, 255, 0.9);
+    opacity: 0;
+    animation: explosiveEntrance 2.0s cubic-bezier(0.22, 1, 0.36, 1) 0.3s forwards;
+}
+
+@keyframes tagReveal {
+    0% { transform: translateY(100%); letter-spacing: 4rem; opacity: 0; }
+    100% { transform: translateY(0); letter-spacing: 1.8rem; opacity: 1; }
+}
+
+.btn-ultra-glow {
+    position: relative;
+    display: inline-block;
+    padding: 1.6rem 5.5rem;
+    background: rgba(255, 0, 224, 0.2);
+    color: #fff;
+    text-decoration: none;
+    font-weight: 900;
+    letter-spacing: 0.5rem;
+    border: 1px solid var(--accent-color);
+    box-shadow: 0 0 30px rgba(255, 0, 224, 0.4);
+    overflow: hidden;
+    transition: 0.5s;
+}
+
+.btn-ultra-glow:hover {
+    background: var(--accent-color);
+    box-shadow: 0 0 80px rgba(255, 0, 224, 1);
+    transform: translateY(-8px) scale(1.08);
+}
+
+.scroll-ind-modern {
+    position: absolute;
+    bottom: 30px; /* Clearly at the bottom */
+    left: 50%;
+    transform: translateX(-50%);
+    width: 2px; height: 50px; /* Reduced height to avoid text */
+    background: rgba(255,255,255,0.15);
+    overflow: hidden;
+    z-index: 100;
+}
+
+.scroll-dot {
+    width: 100%; height: 25%;
+    background: var(--accent-color);
+    animation: scrollSlide 2s cubic-bezier(0.16, 1, 0.3, 1) infinite;
+}
+
+@keyframes scrollSlide {
+    0% { transform: translateY(-100%); }
+    100% { transform: translateY(500%); }
+}
+
+@media (max-width: 768px) {
+    .hero { padding-top: 100px; }
+    .hero-tagline { font-size: 1.2rem; letter-spacing: 0.8rem; }
+}
+
+/* Spark Elements - Elite Physics (High-Visibility Update) */
+.spark {
+    position: absolute;
+    border-radius: 50%;
+    pointer-events: none;
+    opacity: 0.8 !important; /* Force high visibility */
+    bottom: -10px;
+    filter: blur(0.5px); /* Sharper definition */
+    box-shadow: 0 0 10px currentColor, 0 0 20px currentColor;
+    z-index: 5;
+    mix-blend-mode: plus-lighter; /* Additive glow for vibrancy */
+}
+
+@keyframes sparkFly {
+    0% { transform: translateY(0) translateX(0) scale(1); opacity: 0; }
+    10% { opacity: 1; }
+    100% { transform: translateY(-150vh) translateX(var(--drift)) scale(0.4); opacity: 0; }
+}
+
+/* Footer Refinements */
+.footer-logo {
+    margin-bottom: 1.5rem;
+}
+.footer-logo img {
+    height: 60px;
+    margin: 0 auto;
+    filter: invert(1) drop-shadow(0 0 10px rgba(255, 0, 224, 0.4)); /* Invert + Pink glow */
+}
+/* Footer Copyright Styles from Snippet */
+.footer-copyright {
+    margin-top: 30px;
+    font-family: inherit;
+    font-size: 0.85rem;
+    color: rgba(255, 255, 255, 0.4);
+    letter-spacing: 0.05em;
+    display: block; /* Ensure it's a block container */
+}
+
+.stealth-link {
+    color: inherit;
+    text-decoration: none;
+    transition: opacity 0.3s ease;
+}
+
+.stealth-link:hover {
+    text-decoration: none;
+    opacity: 0.8;
+    color: inherit;
+}
+
+.footer-copyright .separator {
+    margin: 0 5px;
+    opacity: 0.5;
+}
+
+/* Responsive Behavior */
+@media (max-width: 768px) {
+    .footer-copyright .separator {
+        display: none;
+    }
+    .footer-copyright .produced-by {
+        display: block;
+        margin-top: 8px;
+    }
+}
+/* Star Glitter / Sparkle Glint */
+.logo-sparkle {
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    background: white;
+    box-shadow: 0 0 20px #fff, 0 0 40px #fff;
+    clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
+    opacity: 0;
+    pointer-events: none;
+    z-index: 12;
+}
+
+/* Core Members - Image Fix for Profile */
+.core-member img {
+    display: block !important;
+}
+
+
+
 
 /* Sections */
 .section {
@@ -545,6 +819,56 @@ img {
 
 .fade-in-right {
     transform: translateX(50px);
+}
+
+/* Flashy Hero Animations */
+.animate-title {
+    animation: trackIn 1.5s cubic-bezier(0.2, 0.8, 0.2, 1) forwards, titleGlow 4s linear infinite alternate 1.5s;
+    opacity: 0;
+}
+
+.animate-subtitle {
+    animation: slideUpFade 1s ease forwards 0.8s;
+    opacity: 0;
+}
+
+.animate-copy {
+    animation: slideUpFade 1s ease forwards 1.2s;
+    opacity: 0;
+}
+
+.animate-float {
+    animation: float 6s ease-in-out infinite;
+}
+
+.animate-pulse-glow {
+    animation: pulseGlow 4s ease-in-out infinite alternate;
+}
+
+@keyframes trackIn {
+    0% { letter-spacing: 0.5em; opacity: 0; transform: scale(1.1) translateY(-20px); filter: blur(5px); }
+    100% { letter-spacing: 0; opacity: 1; transform: scale(1) translateY(0); filter: blur(0); }
+}
+
+@keyframes titleGlow {
+    0% { text-shadow: 0 0 10px rgba(255,255,255,0.2), 0 0 20px rgba(229,9,20,0.2); }
+    100% { text-shadow: 0 0 20px rgba(255,255,255,0.8), 0 0 40px rgba(229,9,20,0.6), 0 0 80px rgba(229,9,20,0.4); }
+}
+
+@keyframes slideUpFade {
+    0% { opacity: 0; transform: translateY(30px); }
+    100% { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes float {
+    0% { transform: translateY(0px) rotate(0deg); }
+    50% { transform: translateY(-15px) rotate(1deg); }
+    100% { transform: translateY(0px) rotate(0deg); }
+}
+
+@keyframes pulseGlow {
+    0% { box-shadow: 0 5px 25px rgba(0,0,0,0.5), 0 0 0 rgba(229,9,20,0); }
+    100% { box-shadow: 0 15px 35px rgba(0,0,0,0.7), 0 0 40px rgba(229,9,20,0.3); }
 }
 
 /* Responsive adjustments */

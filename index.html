@@ -10,7 +10,7 @@
     <link
         href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Shippori+Mincho:wght@400;500;700&display=swap"
         rel="stylesheet">
-    <link rel="stylesheet" href="style.css?v=fix6">
+    <link rel="stylesheet" href="style.css?v=final_fix">
     <meta name="description"
         content="KSL Live World、Girls Dead Monster starring LiSAなど数々の著名アーティストをサポートしたドラマーSHOWが率いる音楽制作集団。メンバーにはfripSideのボーカル上杉真央(mAO)、『ドラえもん』主題歌歌手MAO(Duca)、イラストレーター赤坂アカらが参加。">
     <meta name="keywords"
@@ -20,7 +20,7 @@
 <body>
     <header class="header">
         <div class="logo">
-            <a href="index.html"><img src="images/newlogo.jpg" alt="JACKPOTRASH Logo"></a>
+            <a href="index.html"><img src="images/jAcKp☆TrASHロゴ０２.png" alt="JACKPOTRASH Logo"></a>
         </div>
         <button class="mobile-menu-btn" aria-label="Toggle navigation">
             <span></span>
@@ -42,19 +42,32 @@
 
     <main>
         <section id="top" class="hero">
-            <div class="hero-container">
-                <div class="hero-image-wrapper animate-on-scroll fade-in-left">
-                    <a href="discography.html#album4"><img src="images/Aurora_jaket.jpg" alt="Aurora Album Art"
-                            class="hero-img"></a>
-                </div>
-                <div class="hero-content animate-on-scroll fade-in-right">
-                    <h1 class="hero-title">jAcKp☆TrASH</h1>
-                    <p class="hero-subtitle">SOUND CREATIVE UNIT</p>
-                    <div class="hero-copy">
-                        <p>音楽総合制作集団 ジャックポットラッシュ</p>
-                        <p>電波・萌え系からハードロック、ゴシック系まで。<br>あらゆる「音」を創造する。</p>
+            <div class="hero-mesh-bg"></div>
+            <div class="hero-vignette"></div>
+            <div class="hero-particles" id="hero-particles"></div>
+            <div class="hero-content-wrapper">
+                <div class="hero-perspective-container">
+                    <div class="hero-logo-container" id="hero-logo-card">
+                        <div class="logo-glitch-layer">
+                            <img src="images/jAcKp☆TrASHロゴ.png" alt="jAcKp☆TrASH" class="hero-main-logo">
+                        </div>
+                        <div class="logo-glint-mask">
+                            <div class="logo-glint-beam"></div>
+                        </div>
+                        <div class="logo-flash"></div>
                     </div>
                 </div>
+                <div class="hero-text-content">
+                    <div class="hero-tagline-reveal">
+                        <p class="hero-tagline">SOUND CREATIVE UNIT</p>
+                    </div>
+                    <div class="hero-description animate-reveal">
+                        <p>音楽総合制作集団 ジャックポットラッシュ</p>
+                    </div>
+                </div>
+            </div>
+            <div class="scroll-ind-modern">
+                <div class="scroll-dot"></div>
             </div>
         </section>
 
@@ -62,6 +75,10 @@
             <div class="container animate-on-scroll fade-in-up">
                 <h2 class="section-title">News</h2>
                 <ul class="news-list">
+                    <li class="news-item">
+                        <span class="news-date">Info</span>
+                        <a href="https://x.com/JasdfKomatsu/status/1962307515913572465" target="_blank" class="news-link">航空自衛隊小松基地航空祭2025の紹介動画にjAcKp☆TrASHのEAGLE WINGSが採用されました。</a>
+                    </li>
                     <li class="news-item">
                         <span class="news-date">Info</span>
                         <a href="discography.html#album4" class="news-link">4th Album『Aurora』発売</a>
@@ -101,33 +118,11 @@
             </div>
         </section>
 
-        <section class="section">
-            <div class="container animate-on-scroll fade-in-up">
-                <h2 class="section-title">Pick Up</h2>
-                <div class="hero-container" style="min-height: auto; padding: 0;">
-                    <div class="hero-image-wrapper">
-                        <a href="discography.html#album4">
-                            <img src="images/Aurora_jaket.jpg" alt="Aurora" class="hero-img">
-                        </a>
-                    </div>
-                    <div class="hero-content">
-                        <h3 style="font-family: var(--font-heading); font-size: 2rem; margin-bottom: 1rem;">4th Album
-                            "Aurora"</h3>
-                        <p style="margin-bottom: 2rem; color: #ccc;">
-                            総勢8名のボーカリストを迎えた、jAcKp☆TrASHの集大成とも言える4thアルバム。<br>
-                            多彩なジャンルと圧倒的な世界観が展開される一枚。
-                        </p>
-                        <a href="discography.html#album4" class="btn-primary">VIEW DISCOGRAPHY</a>
-                    </div>
-                </div>
-            </div>
-        </section>
     </main>
-
     <footer class="footer">
         <div class="container">
             <div class="footer-logo">
-                <img src="images/newlogo.jpg" alt="JACKPOTRASH">
+                <img src="images/jAcKp☆TrASHロゴ０２.png" alt="jAcKp☆TrASH Logo">
             </div>
             <div class="footer-links">
                 <a href="https://twitter.com/JACKPOTRASH" target="_blank" class="footer-icon-link"
@@ -154,11 +149,15 @@
                     </svg>
                 </a>
             </div>
-            <p class="copyright">copyright© jAcKp☆TrASH all rights reserved.</p>
+            <div class="footer-copyright">
+                <span class="copyright-text">copyright&copy; jAcKp&star;TrASH all rights reserved.</span>
+                <span class="separator"> | </span>
+                <span class="produced-by">Produced by <a href="https://showtimeboxx.com/creative/" class="stealth-link">SHOWTIMEBOXX CREATIVE</a></span>
+            </div>
         </div>
     </footer>
 
-    <script src="script.js?v=fix6"></script>></script>
+    <script src="script.js"></script>
 </body>
 
 </html>
