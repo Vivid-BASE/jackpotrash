@@ -154,4 +154,24 @@ document.addEventListener('DOMContentLoaded', () => {
             if (Math.random() > 0.6) triggerSparkle(); // Slightly more rare for premium feel
         }, 1200);
     }
+
+    // Back to Top Logic
+    const backToTopBtn = document.getElementById('backToTop');
+    if (backToTopBtn) {
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 300) {
+                backToTopBtn.classList.add('visible');
+            } else {
+                backToTopBtn.classList.remove('visible');
+            }
+        });
+
+        backToTopBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+    }
 });

@@ -378,6 +378,8 @@ img {
 @media (max-width: 768px) {
     .hero { padding-top: 100px; }
     .hero-tagline { font-size: 1.2rem; letter-spacing: 0.8rem; }
+    .hero-perspective-container { max-width: 320px; } /* Shrink emblem on mobile */
+    .hero-description { font-size: 0.9rem; letter-spacing: 0.15rem; }
 }
 
 /* Spark Elements - Elite Physics (High-Visibility Update) */
