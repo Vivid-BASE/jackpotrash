@@ -1,5 +1,6 @@
 export default {
   async fetch(request, env) {
+    // CORS Preflight
     if (request.method === 'OPTIONS') {
       return new Response(null, {
         headers: {
@@ -21,62 +22,76 @@ export default {
       const subject = formData.get('subject');
       const message = formData.get('message');
 
+      const apiKey = env.RESEND_API_KEY || 're_PdSHDcrC_K9efULPY1fq1BsCrcMd33SpW';
+      const toEmail = env.NOTIFICATION_EMAIL || 'jackpotrash@gmail.com';
+
       if (!name || !email || !subject || !message) {
         return new Response(JSON.stringify({ error: 'All fields are required' }), {
           status: 400,
-          headers: { 'Content-Type': 'application/json' },
+          headers: { 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*' },
         });
       }
 
-      // 運営への通知メール送信
-      const resendResponse = await fetch('https://api.resend.com/emails', {
+      // 1. 運営への通知メール (Admin Notification)
+      const adminRes = await fetch('https://api.resend.com/emails', {
         method: 'POST',
         headers: {
-          'Authorization': `Bearer re_PdSHDcrC_K9efULPY1fq1BsCrcMd33SpW`,
+          'Authorization': `Bearer ${apiKey}`,
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          from: 'Contact Form <onboarding@resend.dev>', // 実際の独自ドメイン送信元に変える場合はここを変更
-          to: ['jackpotrash@gmail.com'],
+          from: 'jAcKp☆TrASH Contact <onboarding@resend.dev>',
+          to: [toEmail],
           reply_to: [email],
-          subject: `[サイトお問合せ] ${subject}`,
+          subject: `[WEBお問合せ] ${subject}`,
           html: `
-            <h2>jAcKp☆TrASH WEBサイト 問い合わせフォーム</h2>
-            <p><strong>お名前:</strong> ${name}</p>
-            <p><strong>メールアドレス:</strong> ${email}</p>
+            <h3>WEBサイトからのお問い合わせ</h3>
+            <p><strong>名前:</strong> ${name}</p>
+            <p><strong>メール:</strong> ${email}</p>
             <p><strong>件名:</strong> ${subject}</p>
-            <p><strong>本文:</strong></p>
-            <div style="background: #f4f4f4; padding: 15px; border-radius: 5px;">
-                ${message.replace(/\n/g, '<br>')}
+            <p><strong>内容:</strong></p>
+            <div style="padding:15px; background:#f9f9f9; border-radius:5px; border:1px solid #eee;">
+              ${message.replace(/\n/g, '<br>')}
             </div>
-          `,
-        }),
-      });
-
-      if (!resendResponse.ok) throw new Error('Failed to send notification email');
-
-      // ユーザーへの自動返信
-      await fetch('https://api.resend.com/emails', {
-        method: 'POST',
-        headers: {
-          'Authorization': `Bearer re_PdSHDcrC_K9efULPY1fq1BsCrcMd33SpW`,
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          from: 'jAcKp☆TrASH <onboarding@resend.dev>', // 同上
-          to: [email],
-          subject: '【jAcKp☆TrASH】お問い合わせありがとうございます',
-          html: `
-            <p>${name}様</p>
-            <p>お問い合わせいただき、誠にありがとうございます。</p>
-            <p>内容を確認次第、担当者よりご連絡させていただきます。<br>今しばらくお待ちくださいませ。</p>
-            <hr>
-            <p><strong>お送りいただいた内容:</strong></p>
-            <p>件名: ${subject}</p>
-            <p>${message.replace(/\n/g, '<br>')}</p>
           `
         }),
       });
+
+      if (!adminRes.ok) {
+        const errorData = await adminRes.json();
+        console.error('Resend Admin Error:', errorData);
+        throw new Error(`Resend Admin Mail Failed: ${JSON.stringify(errorData)}`);
+      }
+
+      // 2. ユーザーへの自動返信 (User Auto-Reply)
+      // 注意: onboarding@resend.dev を使用している場合、宛先が認証済みのアドレスでないと失敗します。
+      try {
+        await fetch('https://api.resend.com/emails', {
+          method: 'POST',
+          headers: {
+            'Authorization': `Bearer ${apiKey}`,
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            from: 'jAcKp☆TrASH <onboarding@resend.dev>',
+            to: [email],
+            subject: 'お問い合わせありがとうございます【jAcKp☆TrASH】',
+            html: `
+              <p>${name} 様</p>
+              <p>jAcKp☆TrASHへのお問い合わせ、誠にありがとうございます。</p>
+              <p>以下の内容で受け付けいたしました。内容を確認の上、担当者より折り返しご連絡させていただきます。</p>
+              <hr>
+              <p><strong>お名前:</strong> ${name}</p>
+              <p><strong>件名:</strong> ${subject}</p>
+              <p><strong>内容:</strong></p>
+              <p>${message.replace(/\n/g, '<br>')}</p>
+            `
+          }),
+        });
+      } catch (autoReplyError) {
+        // 自動返信の失敗はメインプロセスの成功を妨げないようにする
+        console.warn('Auto-reply failed (likely due to Resend restrictions):', autoReplyError);
+      }
 
       return new Response(JSON.stringify({ success: true }), {
         status: 200,
@@ -87,7 +102,8 @@ export default {
       });
 
     } catch (error) {
-      return new Response(JSON.stringify({ error: 'Internal server error' }), {
+      console.error('Worker Error:', error);
+      return new Response(JSON.stringify({ error: error.message || 'Internal server error' }), {
         status: 500,
         headers: {
           'Content-Type': 'application/json',

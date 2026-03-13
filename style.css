@@ -300,8 +300,13 @@ img {
 @keyframes megaGlintPulse {
     0% { transform: translate(-50%, -50%) scale(0); opacity: 0; }
     20% { opacity: 0.8; }
-    100% { transform: translate(-50%, -50%) scale(1.5); opacity: 0; }
+    100% { transform: translate(-50%, -50%) scale(1.8); opacity: 0; }
 }
+
+.logo-flash {
+    will-change: transform, opacity;
+}
+
 
 .hero-tagline-reveal {
     overflow: hidden;
@@ -452,13 +457,29 @@ img {
     position: absolute;
     width: 20px;
     height: 20px;
-    background: white;
-    box-shadow: 0 0 20px #fff, 0 0 40px #fff;
-    clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
+    /* Use radial-gradient instead of clip-path to avoid mobile "square" artifacts */
+    background: radial-gradient(circle, #fff 0%, rgba(255, 255, 255, 0.8) 20%, transparent 70%);
+    box-shadow: 0 0 15px #fff;
     opacity: 0;
     pointer-events: none;
     z-index: 12;
+    will-change: transform, opacity;
 }
+
+/* Also add a cross-shape to make it look more like a star without clip-path */
+.logo-sparkle::before,
+.logo-sparkle::after {
+    content: '';
+    position: absolute;
+    top: 50%; left: 50%;
+    background: #fff;
+    transform: translate(-50%, -50%);
+    border-radius: 50%;
+}
+
+.logo-sparkle::before { width: 100%; height: 2px; }
+.logo-sparkle::after { width: 2px; height: 100%; }
+
 
 /* Core Members - Image Fix for Profile */
 .core-member img {
