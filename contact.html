@@ -117,18 +117,31 @@
                         </div>
                         <div style="text-align: center;">
                             <button type="submit" class="btn-primary" style="cursor: pointer;">SEND</button>
+                            <div id="formStatus" class="form-status"></div>
                         </div>
                     </form>
 
                     <script>
                     const contactForm = document.getElementById('contactForm');
+                    const formStatus = document.getElementById('formStatus');
+
+                    function showStatus(text, type) {
+                        formStatus.textContent = text;
+                        formStatus.className = 'form-status active ' + type;
+                        setTimeout(() => {
+                            formStatus.className = 'form-status';
+                        }, 5000);
+                    }
+
                     contactForm.addEventListener('submit', async function (e) {
                       e.preventDefault();
                       const formData = new FormData(contactForm);
                       const submitBtn = contactForm.querySelector('button[type="submit"]');
+                      
                       submitBtn.disabled = true;
                       submitBtn.textContent = 'SENDING...';
                       submitBtn.style.opacity = '0.5';
+                      formStatus.className = 'form-status';
                       
                       try {
                         const response = await fetch('https://jackpotrash-mail-worker.showtimelabel.workers.dev', {
@@ -137,14 +150,14 @@
                         });
                     
                         if (response.ok) {
-                          alert('送信完了しました。お問い合わせありがとうございます。');
+                          showStatus('送信完了しました。お問い合わせありがとうございます。', 'success');
                           contactForm.reset();
                         } else {
-                          alert('送信に失敗しました。時間をおいて再度お試しください。');
+                          showStatus('送信に失敗しました。時間をおいて再度お試しください。', 'error');
                         }
                       } catch (error) {
                         console.error('Error:', error);
-                        alert('送信に失敗しました。設定が完了していない可能性があります。');
+                        showStatus('送信に失敗しました。管理者にお問い合わせください。', 'error');
                       } finally {
                         submitBtn.disabled = false;
                         submitBtn.textContent = 'SEND';
