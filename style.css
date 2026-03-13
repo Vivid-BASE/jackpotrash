@@ -1189,3 +1189,77 @@ img {
     margin-top: 0.5rem;
     font-weight: 700;
 }
+
+/* Premium Back to Top Button */
+.back-to-top {
+    position: fixed;
+    bottom: 40px;
+    right: 40px;
+    width: 60px;
+    height: 60px;
+    background: rgba(13, 13, 13, 0.85);
+    border: 1px solid var(--accent-color);
+    border-radius: 50%;
+    color: var(--accent-color);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    z-index: 2000;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(20px);
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    backdrop-filter: blur(10px);
+    box-shadow: 0 0 15px rgba(255, 0, 224, 0.2);
+}
+
+.back-to-top.visible {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.back-to-top:hover {
+    background: var(--accent-color);
+    color: #fff;
+    transform: scale(1.1) translateY(-5px);
+    box-shadow: 0 0 35px rgba(255, 0, 224, 0.8);
+}
+
+.back-to-top svg {
+    width: 32px;
+    height: 32px;
+    fill: currentColor;
+}
+
+/* Inline Form Feedback */
+.form-status {
+    margin-top: 1.5rem;
+    padding: 1rem;
+    border-radius: 4px;
+    font-size: 0.95rem;
+    text-align: center;
+    opacity: 0;
+    transform: translateY(10px);
+    transition: all 0.3s ease;
+    display: none;
+}
+
+.form-status.active {
+    opacity: 1;
+    transform: translateY(0);
+    display: block;
+}
+
+.form-status.success {
+    background: rgba(0, 255, 128, 0.1);
+    color: #00ff80;
+    border: 1px solid rgba(0, 255, 128, 0.3);
+}
+
+.form-status.error {
+    background: rgba(255, 59, 48, 0.1);
+    color: #ff3b30;
+    border: 1px solid rgba(255, 59, 48, 0.3);
+}
