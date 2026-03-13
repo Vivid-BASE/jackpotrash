@@ -1,0 +1,7 @@
+name = "jackpotrash-mail-worker"
+main = "worker.js"
+compatibility_date = "2024-03-13"
+
+[vars]
+# Notification Email
+NOTIFICATION_EMAIL = "jackpotrash@gmail.com"
