@@ -61,7 +61,7 @@ img {
     top: 0;
     left: 0;
     width: 100%;
-    padding: 1rem 5rem; /* Increased from 2rem to move inward on PC */
+    padding: 1rem 15%; /* Significantly increased to move logo/menu further inward */
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -201,7 +201,7 @@ img {
 
 .hero-perspective-container {
     width: 100%;
-    max-width: 720px; /* Reduced to shrink emblem slightly */
+    max-width: 500px; /* Reduced further from 720px to shrink emblem */
     perspective: 3000px;
     margin-bottom: 5.5rem; /* Increased significantly to clear text from scroll line */
     transform-style: preserve-3d;
@@ -388,7 +388,7 @@ img {
 @media (max-width: 768px) {
     .hero { padding-top: 100px; }
     .hero-tagline { font-size: 1.2rem; letter-spacing: 0.8rem; }
-    .hero-perspective-container { max-width: 320px; } /* Shrink emblem on mobile */
+    .hero-perspective-container { max-width: 240px; } /* Shrink emblem further on mobile */
     .hero-description { font-size: 0.9rem; letter-spacing: 0.15rem; }
 }
 
